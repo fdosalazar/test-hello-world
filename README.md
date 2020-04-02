@@ -26,8 +26,8 @@ This project was created in a macbook laptop using minikube like k8s local provi
 ## Deploy
 	
 ```sh
-$ cd ms-hello-world
-$ ./deploy.sh
+$ chmod +x deploy
+$ ./deploy
 ```
 
 *Date: 2020-04-02*
