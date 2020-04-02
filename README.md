@@ -19,9 +19,9 @@ This project was created in a macbook laptop using minikube like k8s local provi
 
 ## Flow
 
-Deployment: It creates two replicaSet(pod) with one container in each pod. They have a default mapping port using the port 5000 like an exposed container port and targetPort.
-Service: This service is ClusterIP type. It means that it's a default k8s service and allows to other pods to be able to access to the deployment created previuosly.
-Ingress: This expose the ClusterIP service and allows the traffic to the microservice.
+* Deployment: It creates two replicaSet(pod) with one container in each pod. They have a default mapping port using the port 5000 like an exposed container port and targetPort.
+* Service: This service is ClusterIP type. It means that it's a default k8s service and allows to other pods to be able to access to the deployment created previuosly.
+* Ingress: This expose the ClusterIP service and allows the traffic to the microservice.
 
 ## Deploy
 	
