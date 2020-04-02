@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: fif
+  name: ms-hello-word-deployment
+  labels:
+    app: ms-hello-word
+    app-languaje: py 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ms-hello-word
+  template:
+    metadata:
+      labels:
+        app: ms-hello-word
+    spec:
+      containers:
+        - name: ms-hello-word
+          image: fdosalazar/ms-hello-world:1.0.0
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 30

@@ -1,0 +1,37 @@
+apiVersion: {{ .Values.deployment.apiVersion }}
+kind: Deployment
+metadata:
+  namespace: {{ .Values.global.namespace }}
+  name: "{{ .Values.global.appName }}-deployment"
+  labels:
+    app: {{ .Values.global.appName }}
+    app-language: {{ .Values.global.language }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.global.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.appName }}
+    spec:
+      containers:
+        - name: {{ .Values.global.appName }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.global.appPort }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.global.appPort }}
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.global.appPort }}
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 30

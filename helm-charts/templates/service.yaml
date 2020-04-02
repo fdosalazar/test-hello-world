@@ -1,0 +1,16 @@
+apiVersion: {{ .Values.service.apiVersion }}
+kind: Service
+metadata:
+  namespace: {{ .Values.global.namespace }}
+  name: "{{ .Values.global.appName }}-ci-service"
+  labels:
+    app: {{ .Values.global.appName }}
+spec:
+  selector:
+    app: {{ .Values.global.appName }}
+  type: {{ .Values.service.type }}    
+  ports:
+  - name: http
+    port: {{ .Values.global.appPort }} 
+    targetPort: {{ .Values.global.appPort }} 
+    protocol: TCP

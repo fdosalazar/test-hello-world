@@ -1,0 +1,20 @@
+!#/bin/bash
+
+echo "######### Phase Build"
+
+echo "#### Building docker container image"
+docker build -t fif/ms-hello-world:1.0.0 ./app
+
+echo "######### Phase Test"
+
+echo "#### Executing docker container"
+docker run -it -d -p 5000:5000 --name ms-hello-world fif/ms-hello-world:1.0.0
+
+echo "#### Test endpoint"
+curl -v http://localhost:5000/
+docker stop ms-hello-world
+
+echo "######### Deploy"
+
+echo "#### Executing Helm"
+helm install ms-hello-world ./helm-charts

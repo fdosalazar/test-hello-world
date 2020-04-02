@@ -1,0 +1,26 @@
+global:
+  namespace: fif
+  appName: ms-hello-world
+  language: py
+  appPort: 5000
+
+image:
+  repository: fdosalazar/ms-hello-world
+  tag: 1.0.0
+
+deployment:
+  apiVersion: apps/v1
+  replicaCount: 2
+
+namespace:
+  apiVersion: v1
+
+service:
+  apiVersion: v1
+  type: ClusterIP
+  port: 5000
+  targetPort: 5000
+
+ingress:
+  enabled: true
+  apiVersion: networking.k8s.io/v1beta1

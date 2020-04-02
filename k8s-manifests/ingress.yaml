@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  namespace: fif
+  name: ms-hello-word-ingress
+  labels:
+    app: ms-hello-word
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ms-hello-word-ci-service
+          servicePort: 5000

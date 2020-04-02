@@ -1,0 +1,17 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: {{ .Values.ingress.apiVersion }}
+kind: Ingress
+metadata:
+  namespace: {{ .Values.global.namespace }}
+  name: "{{ .Values.global.appName }}-ingress"
+  labels:
+    app: {{ .Values.global.appName }}
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: "{{ .Values.global.appName }}-ci-service"
+          servicePort: {{ .Values.service.port }}
+{{- end }}
